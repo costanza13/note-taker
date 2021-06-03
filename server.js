@@ -11,9 +11,11 @@ app.use(express.json());
 
 app.use(express.static('public'));
 
+const notes = JSON.parse(fs.readFileSync(path.join(__dirname, 'db/db.json')));
+
 // html routes
 app.get('/notes', (req, res) => {
-  res.sendFile(path.join(__dirname, './public/notes.html'));
+  res.sendFile(path.join(__dirname, 'public/notes.html'));
 });
 
 // api routes
