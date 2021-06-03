@@ -1,12 +1,7 @@
 [
   {
     "id": 1,
-    "title": "Test Title",
-    "text": "Test text"
-  },
-  {
-    "id": 2,
-    "title": "Second Test Title",
-    "text": "Second test text"
+    "title": "Sample Note",
+    "text": "This is a sample note. It exists only to show you, esteemed user, what your notes will look like once you add them.  Feel free to delete it using the trash icon."
   }
 ]

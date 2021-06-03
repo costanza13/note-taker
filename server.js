@@ -19,7 +19,7 @@ app.get('/notes', (req, res) => {
 });
 
 // api routes
-app.get('/api/notes', (req, res) => {  
+app.get('/api/notes', (req, res) => {
   res.sendFile(path.join(__dirname, 'db/db.json'));
 });
 
@@ -43,7 +43,32 @@ app.post('/api/notes', ({ body }, res) => {
 
 app.delete('/api/notes/:id', (req, res) => {
   console.log('deleting note ' + req.params.id);
-}); 
+  // find note by id
+  let i = 0;
+  while (i < notes.length) {
+    if (notes[i].id === parseInt(req.params.id)) {
+      break;
+    }
+    i++;
+  }
+  if (i < notes.length) {
+    notes.splice(i, 1);
+    fs.writeFile(path.join(__dirname, 'db/db.json'), JSON.stringify(notes, null, 2), (err) => {
+      if (err) {
+        console.error(err.message);
+        res.status(500).json({
+          error: err.message
+        });
+      }
+      res.json({
+        message: 'deleted note',
+        id: i
+      });
+    });
+  } else {
+    res.status(404).json({ error: 'note note found' });
+  }
+});
 
 // default response for any other request (Not Found)
 app.use((req, res) => {
