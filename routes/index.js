@@ -19,7 +19,6 @@ router.get('/api/notes', (req, res) => {
 
 router.post('/api/notes', ({ body }, res) => {
   const newNote = body;
-  console.log('notes:', notes);
   newNote.id = 1 + notes.reduce((acc, a) => Math.max(acc, a.id), 0);
   notes.push(newNote);
   fs.writeFile(path.join(__dirname, '../db/db.json'), JSON.stringify(notes, null, 2), (err) => {
