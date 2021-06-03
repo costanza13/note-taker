@@ -1,11 +1,11 @@
 [
   {
-    "id" : 1,
+    "id": 1,
     "title": "Test Title",
     "text": "Test text"
   },
   {
-    "id" : 2,
+    "id": 2,
     "title": "Second Test Title",
     "text": "Second test text"
   }
