@@ -42,7 +42,6 @@ app.post('/api/notes', ({ body }, res) => {
 });
 
 app.delete('/api/notes/:id', (req, res) => {
-  console.log('deleting note ' + req.params.id);
   // find note by id
   let i = 0;
   while (i < notes.length) {

@@ -99,7 +99,9 @@ const handleNoteDelete = (e) => {
 const handleNoteView = (e) => {
   e.preventDefault();
   activeNote = JSON.parse(e.target.parentElement.getAttribute('data-note'));
-  renderActiveNote();
+  if (activeNote) {
+    renderActiveNote();
+  }
 };
 
 // Sets the activeNote to an empty object and allows the user to enter a new note
@@ -132,7 +134,11 @@ const renderNoteList = async (notes) => {
 
     const spanEl = document.createElement('span');
     spanEl.innerText = text;
-    spanEl.addEventListener('click', handleNoteView);
+    if (delBtn) {
+      spanEl.addEventListener('click', handleNoteView);
+    } else {
+      liEl.classList.add('disabled');
+    }
 
     liEl.append(spanEl);
 
