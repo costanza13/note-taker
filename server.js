@@ -11,7 +11,7 @@ app.use(express.json());
 
 app.use(express.static('public'));
 
-const notes = JSON.parse(fs.readFileSync(path.join(__dirname, 'db/db.json')));
+let notes = [];
 
 // html routes
 app.get('/notes', (req, res) => {
@@ -20,7 +20,8 @@ app.get('/notes', (req, res) => {
 
 // api routes
 app.get('/api/notes', (req, res) => {
-  res.sendFile(path.join(__dirname, 'db/db.json'));
+  notes = JSON.parse(fs.readFileSync(path.join(__dirname, 'db/db.json')));
+  res.json(notes);
 });
 
 app.post('/api/notes', ({ body }, res) => {
