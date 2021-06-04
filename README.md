@@ -10,14 +10,15 @@ This application was designed primarily with small business owners in mind, to h
 
 It provides the following functionality:
 
-* Opening the Note Taker presents the user with a landing page with a link to a notes page
-* The notes page displays existing notes, listed in the left-hand column, plus empty fields to enter a new note title and the note’s text in the right-hand column
-* When both a new title and the note’s text have been entered, a Save icon appears in the navigation at the top of the page
-* Clicking the Save icon saves the note and adds it to the list the left-hand column with the other existing notes
-* Notes in the left-hand column can be clicked to expand them for viewing in the right-hand column
-* Clicking on the Write icon in the navigation at the top of the page presents empty fields in the right-hand column for entering a new note's title and text
-* Existing notes can be deleted by clicking the trash can icon next to them in the left-hand column
+* Opening the Note Taker presents the user with a landing page with a link to a notes page.
+* The notes page displays existing notes, listed in the left-hand column, plus empty fields to enter a new note title and the note’s text in the right-hand column.
+* When both a new title and the note’s text have been entered, a Save icon appears in the navigation at the top of the page.
+* Clicking the Save icon saves the note and adds it to the list the left-hand column with the other existing notes.
+* Notes in the left-hand column can be clicked to expand them for viewing in the right-hand column.
+* Clicking on the Write icon in the navigation at the top of the page presents empty fields in the right-hand column for entering a new note's title and text.
+* Existing notes can be deleted by clicking the trash can icon next to them in the left-hand column.
 * Notes are stored in JSON format in a file on the server, and persist between sessions and across clients.
+* There is a limit of 200 notes, after which an error message will be displayed in the front end, if the user tries to add another note. The limit can be overridden using the environment variable `NOTE_LIMIT`.
 
 ## Credits
 

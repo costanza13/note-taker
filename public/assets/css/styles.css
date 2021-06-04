@@ -71,3 +71,8 @@ html, body {
 .list-container .list-group-item.disabled {
   cursor: default;
 }
+
+.error {
+  background-color: rgb(255, 190, 190);
+  padding: 20px;
+}

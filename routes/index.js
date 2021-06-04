@@ -1,10 +1,14 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+require('dotenv').config();
+
+const noteLimit = process.env.NOTE_LIMIT || 200;
 
 const router = express.Router();
 
-let notes;
+const notesJson = fs.readFileSync(path.join(__dirname, '../db/db.json'));
+let notes = JSON.parse(notesJson);
 
 // html routes
 router.get('/notes', (req, res) => {
@@ -18,21 +22,29 @@ router.get('/api/notes', (req, res) => {
 });
 
 router.post('/api/notes', ({ body }, res) => {
-  const newNote = body;
-  newNote.id = 1 + notes.reduce((acc, a) => Math.max(acc, a.id), 0);
-  notes.push(newNote);
-  fs.writeFile(path.join(__dirname, '../db/db.json'), JSON.stringify(notes, null, 2), (err) => {
-    if (err) {
-      console.error(err.message);
-      res.status(500).json({
-        error: err.message
-      });
-    }
-    res.json({
-      message: 'saved new note',
-      note: newNote
+  if (notes.length >= noteLimit) {
+    res.status(403).json({
+      error: 'Exceeded note limit. Delete notes before adding new ones.'
     });
-  });
+    return;
+  } else {
+    const newNote = body;
+    newNote.id = 1 + notes.reduce((acc, a) => Math.max(acc, a.id), 0);
+    notes.push(newNote);
+
+    fs.writeFile(path.join(__dirname, '../db/db.json'), JSON.stringify(notes, null, 2), (err) => {
+      if (err) {
+        console.error(err.message);
+        res.status(500).json({
+          error: err.message
+        });
+      }
+      res.json({
+        message: 'saved new note',
+        note: newNote
+      });
+    });
+  }
 });
 
 router.delete('/api/notes/:id', (req, res) => {
