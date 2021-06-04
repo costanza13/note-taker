@@ -40,6 +40,20 @@ const saveNote = (note) =>
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(note),
+  })
+  .then(response => {
+    if (!response.ok) {
+      response.json()
+      .then(data => {
+        console.log(data.error);
+        const errorEl = document.createElement('div');
+        errorEl.classList.add('error');
+        errorEl.innerText = data.error;
+
+        document.querySelector('.card').prepend(errorEl);
+        setTimeout(function() { errorEl.remove(); }, 5000);
+      });
+    }
   });
 
 const deleteNote = (id) =>
